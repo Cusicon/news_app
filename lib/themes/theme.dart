@@ -9,6 +9,10 @@ ThemeData appTheme() {
       iconTheme: IconThemeData(color: Colors.white),
     ),
     textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
       headlineSmall: TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.black,

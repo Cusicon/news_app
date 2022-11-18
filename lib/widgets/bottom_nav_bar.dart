@@ -19,6 +19,7 @@ class BottomNavBar extends StatelessWidget {
       showUnselectedLabels: false,
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.black.withAlpha(100),
+      iconSize: 32.0,
       items: [
         BottomNavigationBarItem(
           icon: Container(

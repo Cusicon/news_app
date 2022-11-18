@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../themes/styles.dart';
-import 'screens.dart';
 
 import '../models/article_model.dart';
+import '../themes/constants.dart';
 import '../widgets/widgets.dart';
+import 'screens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -41,12 +41,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _NewsOfTheDay extends StatelessWidget {
+  final Article article;
+
   const _NewsOfTheDay({
     Key? key,
     required this.article,
   }) : super(key: key);
-
-  final Article article;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +54,7 @@ class _NewsOfTheDay extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.48,
       imageUrl: article.imageUrl,
       width: double.maxFinite,
+      borderRadius: 32.0,
       padding: const EdgeInsets.all(pagePaddingSize),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
