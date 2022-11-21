@@ -22,6 +22,9 @@ ThemeData appTheme() {
         color: Colors.black,
         height: 1.5,
       ),
+      bodyMedium: TextStyle(
+        height: 1.5,
+      ),
     ),
   );
 }
