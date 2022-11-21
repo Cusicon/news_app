@@ -11,7 +11,7 @@ class ImageContainer extends StatelessWidget {
 
   const ImageContainer({
     Key? key,
-    this.height = 125,
+    this.height = 125.0,
     this.borderRadius = 16.0,
     required this.width,
     required this.imageUrl,

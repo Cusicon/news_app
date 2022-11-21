@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Article article = Article.articles[0];
+    Article article = Article.articles[6];
 
     return Scaffold(
       appBar: AppBar(
@@ -55,48 +55,93 @@ class _NewsOfTheDay extends StatelessWidget {
       imageUrl: article.imageUrl,
       width: double.maxFinite,
       borderRadius: 32.0,
-      padding: const EdgeInsets.all(pagePaddingSize),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          CustomTag(backgroundColor: Colors.grey.withAlpha(150), children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: pagePaddingSize / 2),
-              child: Text(
-                'News of the day',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Colors.white),
+          ShaderMask(
+            shaderCallback: (rect) {
+              return LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.white,
+                  Colors.white.withOpacity(0.5),
+                  Colors.white.withOpacity(0.2),
+                ],
+                stops: const [0.5, 0.6, 1.0],
+              ).createShader(rect);
+            },
+            blendMode: BlendMode.dstOut,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(borderRadius),
+                bottomRight: Radius.circular(borderRadius),
+              ),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.48,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.5),
+                      // ignore: todo
+                      // TODO: change colors with image most dominant colors
+                      Colors.black,
+                    ],
+                  ),
+                ),
               ),
             ),
-          ]),
-          const SizedBox(height: maxSizedBox),
-          Text(
-            article.title,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(color: Colors.white),
           ),
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(padding: EdgeInsets.zero),
-            child: Row(
+          Padding(
+            padding: const EdgeInsets.all(pagePaddingSize),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                CustomTag(
+                    backgroundColor: Colors.grey.withAlpha(150),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: pagePaddingSize / 2),
+                        child: Text(
+                          'News of the day',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ]),
+                const SizedBox(height: maxSizedBox),
                 Text(
-                  'Learn More',
+                  article.title,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyMedium!
+                      .headlineSmall!
                       .copyWith(color: Colors.white),
                 ),
-                const SizedBox(width: minSizedBox),
-                const Icon(
-                  Icons.arrow_right_alt,
-                  color: Colors.white,
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Learn More',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.white),
+                      ),
+                      const SizedBox(width: minSizedBox),
+                      const Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -128,10 +173,13 @@ class _BreakingNews extends StatelessWidget {
                 'Breaking News',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              Text(
-                'More',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'More',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              )
             ],
           ),
         ),

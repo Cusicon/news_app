@@ -11,7 +11,7 @@ ThemeData appTheme() {
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         color: Colors.black,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w800,
       ),
       headlineSmall: TextStyle(
         fontWeight: FontWeight.bold,

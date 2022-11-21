@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/article_model.dart';
 
+import '../models/article_model.dart';
 import '../themes/constants.dart';
 import '../widgets/widgets.dart';
 import 'screens.dart';
@@ -12,7 +12,6 @@ class DiscoverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Article article = Article.articles[2];
     const List<String> tabs = ['Health', 'Politics', 'Art', 'Food', 'Science'];
 
     return DefaultTabController(
