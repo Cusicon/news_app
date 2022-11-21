@@ -85,8 +85,6 @@ class _NewsOfTheDay extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.black.withOpacity(0.5),
-                      // ignore: todo
-                      // TODO: change colors with image most dominant colors
                       Colors.black,
                     ],
                   ),

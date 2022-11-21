@@ -88,8 +88,6 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.black.withOpacity(0.9),
-                      // ignore: todo
-                      // TODO: change colors with image most dominant colors
                       paletteColor.color.withOpacity(0.9),
                     ],
                   ),
@@ -99,132 +97,139 @@ class _ArticleScreenState extends State<ArticleScreen> {
             ListView(
               children: [
                 _NewsHeadline(article: article),
-                Container(
-                  padding: const EdgeInsets.all(pagePaddingSize),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomTag(
-                            backgroundColor: paletteColor.color,
-                            borderRadius: 48.0,
-                            children: [
-                              CircleAvatar(
-                                radius: 16.0,
-                                backgroundImage:
-                                    NetworkImage(article.authorImage),
-                                backgroundColor: paletteColor.bodyTextColor,
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                article.author,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                              const SizedBox(width: 8.0),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              CustomTag(
-                                backgroundColor: Colors.grey.shade200,
-                                children: [
-                                  const Icon(
-                                    Icons.schedule,
-                                    color: Colors.grey,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 4.0,
-                                    ),
-                                    child: Text(
-                                      '${DateTime.now().difference(article.createdAt).inHours} h',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(width: minSizedBox),
-                              CustomTag(
-                                backgroundColor: Colors.grey.shade200,
-                                children: [
-                                  const Icon(
-                                    Icons.remove_red_eye_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 4.0,
-                                    ),
-                                    child: Text(
-                                      '${article.views}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: maxSizedBox * 2),
-                      Text(
-                        article.title,
-                        maxLines: 2,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: maxSizedBox * 2),
-                      Text(
-                        article.body,
-                        maxLines: 2,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: maxSizedBox * 2),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: 2,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1.25),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(minPaddingSize),
-                            child: ImageContainer(
-                              width: MediaQuery.of(context).size.width * 0.42,
-                              imageUrl: article.imageUrl,
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                _NewsBody(paletteColor: paletteColor, article: article),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _NewsBody extends StatelessWidget {
+  const _NewsBody({
+    Key? key,
+    required this.paletteColor,
+    required this.article,
+  }) : super(key: key);
+
+  final PaletteColor paletteColor;
+  final Article article;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(pagePaddingSize),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomTag(
+                backgroundColor: paletteColor.color,
+                borderRadius: 48.0,
+                children: [
+                  CircleAvatar(
+                    radius: 16.0,
+                    backgroundImage: NetworkImage(article.authorImage),
+                    backgroundColor: paletteColor.bodyTextColor,
+                  ),
+                  const SizedBox(width: 8.0),
+                  Text(
+                    article.author,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
+                  const SizedBox(width: 8.0),
+                ],
+              ),
+              Row(
+                children: [
+                  CustomTag(
+                    backgroundColor: Colors.grey.shade200,
+                    children: [
+                      const Icon(
+                        Icons.schedule,
+                        color: Colors.grey,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 4.0,
+                        ),
+                        child: Text(
+                          '${DateTime.now().difference(article.createdAt).inHours} h',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: minSizedBox),
+                  CustomTag(
+                    backgroundColor: Colors.grey.shade200,
+                    children: [
+                      const Icon(
+                        Icons.remove_red_eye_outlined,
+                        color: Colors.grey,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 4.0,
+                        ),
+                        child: Text(
+                          '${article.views}',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(height: maxSizedBox * 2),
+          Text(
+            article.title,
+            maxLines: 2,
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: maxSizedBox * 2),
+          Text(
+            article.body,
+            maxLines: 2,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: maxSizedBox * 2),
+          GridView.builder(
+            shrinkWrap: true,
+            itemCount: 2,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 1.25),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(minPaddingSize),
+                child: ImageContainer(
+                  width: MediaQuery.of(context).size.width * 0.42,
+                  imageUrl: article.imageUrl,
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
